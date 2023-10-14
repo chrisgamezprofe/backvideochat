@@ -9,11 +9,11 @@ const options = {
 };
 const server = https.createServer(options,app)
 
-const io = require('socket.io')(server, {
-    cors: {
-        origin: "http://localhost:5173",
-        method:["GET","POST"]
-    }
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "https://frontvideochat.vercel.app",
+    method: ["GET", "POST"]
+  }
 });
 
 io.on("connection",(socket)=> {
