@@ -1,13 +1,7 @@
 const express = require("express")
-const https = require("https")
+const http = require("http")
 const app = express()
-const { v4: uuidv4 } = require("uuid");
-const fs = require("fs");
-const options = {
-    key: fs.readFileSync("localhost-key.pem"),
-    cert: fs.readFileSync("localhost.pem")
-};
-const server = https.createServer(options,app)
+const server = http.createServer(app)
 
 const io = require("socket.io")(server, {
   cors: {
@@ -19,7 +13,7 @@ const io = require("socket.io")(server, {
 io.on("connection",(socket)=> {
     console.log(`user connected ${socket.id}`)
 
-    socket.emit("user", uuidv4());
+    socket.emit("user", socket.id);
     
     socket.on("disconnect", () => {
         socket.broadcast.emit("callEnded")
