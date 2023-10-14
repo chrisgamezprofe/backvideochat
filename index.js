@@ -10,6 +10,10 @@ const io = require("socket.io")(server, {
   }
 });
 
+app.get("/", (req, res) => {
+  res.send("Corriendo");
+});
+
 io.on("connection",(socket)=> {
     console.log(`user connected ${socket.id}`)
 
@@ -34,7 +38,8 @@ io.on("connection",(socket)=> {
 
 })
 
+const PORT = 3000 
 
-server.listen(5000, () => {
+server.listen(PORT || 3000, () => {
     console.log("Servidor corriendo en 5000")
 })
